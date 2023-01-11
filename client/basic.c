@@ -137,13 +137,68 @@ void mul(char a[], char b[], char c[])
 	strcpy(c, nc);
 }
 
-int main()
+void mod(char a[], char b[], char c[])
 {
-	char p[1000] = "114";
-	char q[1000] = "2";
-	char n[3000];
+	int intb;
+	sscanf(b, "%d", &intb);
 
-	mod(p, q, n);
+	char div[100];
+	int intdiv;
+	for (int i = 0; i < strlen(a); i++)
+	{
+		div[strlen(div)] = a[i];
+		div[strlen(div) + 1] = '\0';
+		sscanf(div, "%d", &intdiv);
+		memset(div, 0, 100);
+		sprintf(div, "%d", intdiv % intb);
+	}
 
-	return 0;
+    strcpy(c, div);
+}
+
+int is_prime(char strnum[])
+{
+	if ((strcmp(strnum, "0") == 0) || (strcmp(strnum, "1") == 0))
+	{
+		return 0;
+	}
+
+	char tempresult[strlen(strnum)];
+
+	mod(strnum, "11", tempresult);
+	if (strcmp(tempresult, "0") == 0)
+	{
+		return 0;
+	}
+	memset(tempresult, 0, strlen(strnum));
+
+	mod(strnum, "2", tempresult);
+	if (strcmp(tempresult, "0") == 0)
+	{
+		return 0;
+	}
+	memset(tempresult, 0, strlen(strnum));
+
+	mod(strnum, "3", tempresult);
+	if (strcmp(tempresult, "0") == 0)
+	{
+		return 0;
+	}
+	memset(tempresult, 0, strlen(strnum));
+
+	mod(strnum, "5", tempresult);
+	if (strcmp(tempresult, "0") == 0)
+	{
+		return 0;
+	}
+	memset(tempresult, 0, strlen(strnum));
+	
+	mod(strnum, "7", tempresult);
+	if (strcmp(tempresult, "0") == 0)
+	{
+		return 0;
+	}
+	memset(tempresult, 0, strlen(strnum));
+
+	return 1;
 }
