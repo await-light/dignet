@@ -90,14 +90,3 @@ void mul(char a[], char b[], char c[])
 	}
 	c[lenc + 1] = '\0';
 }
-
-int main()
-{
-	char a[] = "114514";
-	char b[] = "1919810";
-	char c[3000];
-
-	mul(a, b, c);
-
-	printf("%s\n", c);
-}
