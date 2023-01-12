@@ -21,7 +21,7 @@ int int2char(int i)
 	return (i + 48);
 }
 
-int add(char a[], char b[], char c[])
+void add(char a[], char b[], char c[])
 {
 	int la, lb, lc, x;
 	la = strlen(a); lb = strlen(b);
@@ -56,6 +56,48 @@ int add(char a[], char b[], char c[])
 	memset(abuf, 0, 3000);
 	memset(bbuf, 0, 3000);
 	memset(cbuf, 0, 3000);
+}
 
-	return 0;
+void mul(char a[], char b[], char c[])
+{
+	int lena, lenb, lenc, x = 0;
+	
+	lena = strlen(a); lenb = strlen(b);
+	for (int i = 0; i <= lena - 1; ++i)
+	{
+		abuf[i] = char2int(a[lena - 1 - i]);
+	}
+	for (int i = 0; i <= lenb - 1; ++i)
+	{
+		bbuf[i] = char2int(b[lenb - 1 - i]);
+	}
+
+	for (int i = 0; i <= lena - 1; ++i)
+	{
+		for (int j = 0; j <= lenb - 1; ++j)
+		{
+			cbuf[i + j] += abuf[i] * bbuf[j] + x;
+			x = cbuf[i + j] / 10;
+			cbuf[i + j] %= 10;
+		}
+	}
+
+	lenc = lena + lenb;
+	while (cbuf[lenc] == 0 && lenc >= 1) lenc--;
+	for (int i = 0; i <= lenc; i++)
+	{
+		c[i] = int2char(cbuf[lenc - i]);
+	}
+	c[lenc + 1] = '\0';
+}
+
+int main()
+{
+	char a[] = "114514";
+	char b[] = "1919810";
+	char c[3000];
+
+	mul(a, b, c);
+
+	printf("%s\n", c);
 }
