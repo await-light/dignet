@@ -89,4 +89,48 @@ void mul(char a[], char b[], char c[])
 		c[i] = int2char(cbuf[lenc - i]);
 	}
 	c[lenc + 1] = '\0';
+
+	memset(abuf, 0, 3000);
+	memset(bbuf, 0, 3000);
+	memset(cbuf, 0, 3000);
+}
+
+void sub(char a[], char b[], char c[])
+{
+	/*
+	a is bigger than b
+	*/
+	int la, lb, lc;
+	la = strlen(a); lb = strlen(b);
+	for (int i = 0; i <= la - 1; ++i)
+	{
+		abuf[i] = char2int(a[la - 1 - i]);
+	}
+	for (int i = 0; i <= lb - 1; ++i)
+	{
+		bbuf[i] = char2int(b[lb - 1 - i]);
+	}
+	lc = 0;
+	while (lc <= la - 1 || lc <= lb - 1)
+	{
+		cbuf[lc] += abuf[lc] - bbuf[lc];
+		if (cbuf[lc] < 0)
+		{
+			cbuf[lc] += 10;
+			cbuf[lc + 1]--;
+		}
+		lc++;
+	}
+
+	while (cbuf[lc] == 0 && lc >= 1) lc--;
+
+	for (int i = 0; i <= lc; i++)
+	{
+		c[i] = int2char(cbuf[lc - i]);
+	}
+	c[lc + 1] = '\0';
+
+	memset(abuf, 0, 3000);
+	memset(bbuf, 0, 3000);
+	memset(cbuf, 0, 3000);
 }
